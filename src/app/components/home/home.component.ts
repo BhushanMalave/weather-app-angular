@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { WeatherAppService } from 'src/app/services/weatherapp.service';
+import { HomeService } from 'src/app/services/home.service';
 
 @Component({
   selector: 'app-home',
@@ -9,16 +9,16 @@ import { WeatherAppService } from 'src/app/services/weatherapp.service';
 export class HomeComponent implements OnInit {
   temp: string = 'Celcius';
   cityweatherData: any = [];
-  constructor(public weatherAppServices: WeatherAppService) {}
+  constructor(public homeServices: HomeService) {}
   ngOnInit(): void {
     let data: any = localStorage.getItem('weatherDetails');
     this.cityweatherData = JSON.parse(data);
   }
   addToFavourite(cityweatherData: any) {
-    this.weatherAppServices.addtoFavourite(cityweatherData);
+    this.homeServices.addtoFavourite(cityweatherData);
   }
   removeFromFavourite(cityweatherData: any) {
-    this.weatherAppServices.removefromFavourite(cityweatherData);
+    this.homeServices.removefromFavourite(cityweatherData);
     // localStorage.clear();
   }
   convertToFahreneit() {

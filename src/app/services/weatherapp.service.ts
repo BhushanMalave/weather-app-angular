@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { HomeService } from './home.service';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +9,11 @@ import { Router } from '@angular/router';
 export class WeatherAppService {
   cityWeatherData?: any = {};
   cityWeatherDataList?: any = [];
-  constructor(private http: HttpClient, public router: Router) {}
+  constructor(
+    private http: HttpClient,
+    public router: Router,
+    public homeServices: HomeService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -86,169 +91,7 @@ export class WeatherAppService {
           JSON.stringify(this.cityWeatherDataList)
         );
       }
-      this.refresh();
-    });
-  }
-
-  addtoFavourite(weatherData: any) {
-    const data: any = localStorage.getItem('weatherDetailsList');
-    weatherData = {
-      favourite: true,
-      recentSearch: weatherData.recentSearch,
-      data: weatherData.data,
-    };
-    localStorage.setItem('weatherDetails', JSON.stringify(weatherData));
-    const datalist = JSON.parse(data);
-
-    datalist.map((item: any) => {
-      if (item?.data?.location?.name === weatherData?.data?.location?.name) {
-        item.favourite = true;
-      }
-    });
-
-    localStorage.setItem('weatherDetailsList', JSON.stringify(datalist));
-    this.refresh();
-  }
-
-  addtoFavouritefromRecentSearch(weatherData: any) {
-    const data: any = localStorage.getItem('weatherDetailsList');
-    weatherData = {
-      favourite: true,
-      recentSearch: weatherData.recentSearch,
-      data: weatherData.data,
-    };
-    localStorage.setItem('weatherDetails', JSON.stringify(weatherData));
-    const datalist = JSON.parse(data);
-
-    datalist.map((item: any) => {
-      if (item?.data?.location?.name === weatherData?.data?.location?.name) {
-        item.favourite = true;
-      }
-    });
-
-    localStorage.setItem('weatherDetailsList', JSON.stringify(datalist));
-    this.refreshRecentSearchList();
-  }
-
-  removefromFavourite(weatherData: any): void {
-    weatherData = {
-      favourite: false,
-      recentSearch: weatherData.recentSearch,
-      data: weatherData.data,
-    };
-    localStorage.setItem('weatherDetails', JSON.stringify(weatherData));
-    const data: any = localStorage.getItem('weatherDetailsList');
-    const datalist = JSON.parse(data);
-
-    datalist.map((item: any) => {
-      if (item?.data?.location?.name === weatherData?.data?.location?.name) {
-        item.favourite = false;
-      }
-    });
-    localStorage.setItem('weatherDetailsList', JSON.stringify(datalist));
-    this.refresh();
-  }
-
-  removefromFavouriteList(weatherData: any): void {
-    weatherData = {
-      favourite: false,
-      recentSearch: weatherData.recentSearch,
-      data: weatherData.data,
-    };
-    localStorage.setItem('weatherDetails', JSON.stringify(weatherData));
-
-    const data: any = localStorage.getItem('weatherDetailsList');
-    const datalist = JSON.parse(data);
-
-    datalist.map((item: any) => {
-      if (item?.data?.location?.name === weatherData?.data?.location?.name) {
-        item.favourite = false;
-      }
-    });
-    localStorage.setItem('weatherDetailsList', JSON.stringify(datalist));
-    this.refreshFavouriteList();
-  }
-
-  removefromfavouriteinRecentSearchList(weatherData: any): void {
-    weatherData = {
-      favourite: false,
-      recentSearch: weatherData.recentSearch,
-      data: weatherData.data,
-    };
-    localStorage.setItem('weatherDetails', JSON.stringify(weatherData));
-
-    const data: any = localStorage.getItem('weatherDetailsList');
-    const datalist = JSON.parse(data);
-
-    datalist.map((item: any) => {
-      if (item?.data?.location?.name === weatherData?.data?.location?.name) {
-        item.favourite = false;
-      }
-    });
-    localStorage.setItem('weatherDetailsList', JSON.stringify(datalist));
-    this.refreshRecentSearchList();
-  }
-
-  getRecentSearchCities(): void {
-    const data: any = localStorage.getItem('weatherDetailsList');
-    const datalist = JSON.parse(data);
-    const filterdatalist = datalist.filter((item: any): boolean => {
-      return item.recentSearch === true;
-    });
-    localStorage.setItem('recentSearchDetails', JSON.stringify(filterdatalist));
-  }
-
-  getFavouriteCities(): void {
-    const data: any = localStorage.getItem('weatherDetailsList');
-    const datalist = JSON.parse(data);
-    const filterdatalist = datalist.filter((item: any): boolean => {
-      return item.favourite === true;
-    });
-    localStorage.setItem('favouriteCities', JSON.stringify(filterdatalist));
-  }
-
-  clearRecentSearchList(): void {
-    let data: any = localStorage.getItem('weatherDetailsList');
-    const datalist = JSON.parse(data);
-    datalist.map((item: any) => {
-      item.recentSearch = false;
-    });
-    localStorage.setItem('weatherDetailsList', JSON.stringify(datalist));
-    this.refreshRecentSearchList();
-  }
-
-  clearFavouriteCityList(): void {
-    const data: any = localStorage.getItem('weatherDetailsList');
-    const datalist = JSON.parse(data);
-    datalist.map((item: any) => {
-      item.favourite = false;
-    });
-    localStorage.setItem('weatherDetailsList', JSON.stringify(datalist));
-    let weatherData: any = localStorage.getItem('weatherDetails');
-    weatherData = JSON.parse(weatherData);
-    console.log(weatherData);
-    weatherData = {
-      favourite: false,
-      recentSearch: weatherData.recentSearch,
-      data: weatherData.data,
-    };
-    localStorage.setItem('weatherDetails', JSON.stringify(weatherData));
-    this.refreshFavouriteList();
-  }
-
-  refresh() {
-    this.router.navigate(['']).then(() => {
-      window.location.reload();
-    });
-  }
-  refreshFavouriteList() {
-    this.router.navigate(['favourite']).then(() => {
-      window.location.reload();
-    });
-  }
-  refreshRecentSearchList() {
-    this.router.navigate(['recent']).then(() => {
-      window.location.reload();
+      this.homeServices.refresh();
     });
   }
 }
