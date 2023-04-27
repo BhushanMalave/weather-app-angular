@@ -1,24 +1,23 @@
 <div class="main">
   <p class="cityName">
-    {{ cityweatherData.data?.location?.name }},
-    {{ cityweatherData.data?.location?.region }}
+    {{ cityweatherData?.data?.location?.name }},
+    {{ cityweatherData?.data?.location?.region }}
   </p>
   <div class="addfavdiv">
     <img
-      *ngIf="cityweatherData.favourite === false"
+      *ngIf="cityweatherData?.favourite === false"
       src="../../../assets/images/favourite_icon_copy.png"
       alt="favourite"
       class="favourite_icon"
-      (click)="addToFavourite()"
+      (click)="addToFavourite(cityweatherData)"
     />
     <img
-      *ngIf="cityweatherData.favourite === true"
+      *ngIf="cityweatherData?.favourite === true"
       src="../../../assets/images/icon_favourite_Active.png"
       alt="favourite"
       class="favourite_icon"
-      (click)="removeFromFavourite()"
+      (click)="removeFromFavourite(cityweatherData)"
     />
-
     <p class="addfavp">Add to favourite</p>
   </div>
   <div class="weatherdiv">
@@ -29,7 +28,9 @@
     />
 
     <div *ngIf="temp === 'Fahreneit'" class="tempdiv">
-      <div class="notext">{{ cityweatherData?.data?.current?.temp_f }}</div>
+      <div class="notext">
+        {{ (cityweatherData?.data?.current?.temp_f).toFixed(0) }}
+      </div>
       <div class="tempdiv1">
         <div class="tempdiv2" (click)="convertToCelcius()">
           <p class="temptext1">o</p>
@@ -45,7 +46,9 @@
     </div>
 
     <div *ngIf="temp === 'Celcius'" class="tempdiv">
-      <div class="notext">{{ cityweatherData?.data?.current?.temp_c }}</div>
+      <div class="notext">
+        {{ (cityweatherData?.data?.current?.temp_c).toFixed(0) }}
+      </div>
       <div class="tempdiv1">
         <div class="tempdiv3">
           <div class="tempdiv4">
@@ -119,7 +122,7 @@
       <div class="grpdivin">
         <div class="grptext1">Wind</div>
         <div class="grptext2">
-          {{ (cityweatherData?.data?.current?.wind_mph)}}mph
+          {{ cityweatherData?.data?.current?.wind_mph }}mph
         </div>
       </div>
     </div>
