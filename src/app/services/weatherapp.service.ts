@@ -9,6 +9,7 @@ import { HomeService } from './home.service';
 export class WeatherAppService {
   cityWeatherData?: any = {};
   cityWeatherDataList?: any = [];
+  // allreadyExist: boolean = false;
   constructor(
     private http: HttpClient,
     public router: Router,
