@@ -98,3 +98,83 @@
   width: 12vw;
   margin-left: 3vw;
 }
+
+.rectangle {
+  position: absolute;
+  height: 101vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0px;
+  right: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dialoguebox {
+  display: flex;
+  flex-direction: column;
+  height: 210px;
+  width: 458px;
+  border-radius: 2px;
+  background-color: #ffffff;
+  box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.3);
+}
+.are-you-sure-want-to {
+  display: flex;
+  height: 18px;
+  width: 312px;
+  color: #000000;
+  font-family: Roboto;
+  font-size: 15px;
+  letter-spacing: 0;
+  line-height: 18px;
+  align-self: center;
+  margin-top: 58px;
+}
+
+.yes-no-button {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  margin-top: 50px;
+  height: 35px;
+  width: 212px;
+}
+
+.no-button {
+  height: 35px;
+  width: 106px;
+  border-radius: 2px;
+  border: 0px;
+  background-color: #ffffff;
+}
+.yes-button {
+  height: 35px;
+  width: 106px;
+  border-radius: 2px;
+  border: 0px;
+  background-color: #f76b1c;
+}
+.dialoguebox-text-yes {
+  height: 18px;
+  width: 27px;
+  color: #ffffff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 18px;
+  text-align: center;
+}
+.dialoguebox-text-no {
+  height: 18px;
+  width: 27px;
+  color: #000000;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 18px;
+  text-align: center;
+}

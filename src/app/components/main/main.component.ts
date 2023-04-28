@@ -6,7 +6,7 @@ import { WeatherAppService } from 'src/app/services/weatherapp.service';
   styleUrls: ['./main.component.css'],
 })
 export class MainComponent implements OnInit {
-  cityName: string = 'Udupi';
+  cityName: string = '';
   cityResults: any = [];
   active = 'active';
   date: any;

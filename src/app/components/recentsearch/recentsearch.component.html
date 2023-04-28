@@ -10,7 +10,7 @@
 
   <div class="favtopbar" *ngIf="recentSearchCities.length > 0">
     <div>You recently searched for</div>
-    <div (click)="clearRecentSearch()">Clear All</div>
+    <div (click)="showDialogueBox = true">Clear All</div>
   </div>
   <div class="comprender">
     <div class="compdiv" *ngFor="let data of recentSearchCities">
@@ -46,6 +46,21 @@
         class="fav_icon"
         (click)="removeFromFavourite(data)"
       />
+    </div>
+  </div>
+  <div *ngIf="showDialogueBox === true" class="rectangle">
+    <div class="dialoguebox">
+      <div class="are-you-sure-want-to">
+        Are you sure want to clear all from Recent Search?
+      </div>
+      <div class="yes-no-button">
+        <button class="no-button" (click)="showDialogueBox = false">
+          <span class="dialoguebox-text-no">No</span>
+        </button>
+        <button class="yes-button" (click)="clearRecentSearch()">
+          <span class="dialoguebox-text-yes">Yes</span>
+        </button>
+      </div>
     </div>
   </div>
 </div>

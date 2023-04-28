@@ -10,7 +10,7 @@
 
   <div class="favtopbar" *ngIf="favouriteCities.length > 0">
     <div>{{ favouriteCities.length }} City added as favourite</div>
-    <div (click)="clearFavouriteCities()">Remove All</div>
+    <div (click)="showDialogueBox = true">Remove All</div>
   </div>
   <div class="comprender">
     <div class="compdiv" *ngFor="let data of favouriteCities">
@@ -44,6 +44,21 @@
         class="fav_icon"
         (click)="removeFromFavourite(data)"
       />
+    </div>
+  </div>
+  <div *ngIf="showDialogueBox === true" class="rectangle">
+    <div class="dialoguebox">
+      <div class="are-you-sure-want-to">
+        Are you sure want to remove all the favourites?
+      </div>
+      <div class="yes-no-button">
+        <button class="no-button" (click)="showDialogueBox = false">
+          <span class="dialoguebox-text-no">No</span>
+        </button>
+        <button class="yes-button" (click)="clearFavouriteCities()">
+          <span class="dialoguebox-text-yes">Yes</span>
+        </button>
+      </div>
     </div>
   </div>
 </div>

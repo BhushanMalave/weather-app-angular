@@ -10,6 +10,8 @@ import { WeatherAppService } from 'src/app/services/weatherapp.service';
 })
 export class FavouriteComponent implements OnInit {
   favouriteCities: any = [];
+  showDialogueBox: boolean = false;
+
   constructor(
     public weatherAppServices: WeatherAppService,
     public homeServices: HomeService,

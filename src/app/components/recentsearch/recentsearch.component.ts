@@ -10,6 +10,7 @@ import { WeatherAppService } from 'src/app/services/weatherapp.service';
 })
 export class RecentsearchComponent implements OnInit {
   recentSearchCities: any = [];
+  showDialogueBox: boolean = false;
 
   constructor(
     public weatherAppServices: WeatherAppService,
@@ -29,6 +30,7 @@ export class RecentsearchComponent implements OnInit {
   addToFavourite(cityData: any) {
     this.recentsearchServices.addtoFavouritefromRecentSearch(cityData);
   }
+
   removeFromFavourite(cityData: any) {
     this.recentsearchServices.removefromfavouriteinRecentSearchList(cityData);
   }
