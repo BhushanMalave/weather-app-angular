@@ -7,7 +7,7 @@ import { HomeService } from 'src/app/services/home.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  temp: string = 'Celcius';
+  temperature: string = 'Celcius';
   cityweatherData: any = [];
   constructor(public homeServices: HomeService) {}
   ngOnInit(): void {
@@ -19,12 +19,11 @@ export class HomeComponent implements OnInit {
   }
   removeFromFavourite(cityweatherData: any) {
     this.homeServices.removefromFavourite(cityweatherData);
-    // localStorage.clear();
   }
   convertToFahreneit() {
-    this.temp = 'Fahreneit';
+    this.temperature = 'Fahreneit';
   }
   convertToCelcius() {
-    this.temp = 'Celcius';
+    this.temperature = 'Celcius';
   }
 }

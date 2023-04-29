@@ -27,7 +27,7 @@
       class="weather_icon"
     />
 
-    <div *ngIf="temp === 'Fahreneit'" class="tempdiv">
+    <div *ngIf="temperature === 'Fahreneit'" class="tempdiv">
       <div class="notext">
         {{ (cityweatherData?.data?.current?.temp_f).toFixed(0) }}
       </div>
@@ -45,7 +45,7 @@
       </div>
     </div>
 
-    <div *ngIf="temp === 'Celcius'" class="tempdiv">
+    <div *ngIf="temperature === 'Celcius'" class="tempdiv">
       <div class="notext">
         {{ (cityweatherData?.data?.current?.temp_c).toFixed(0) }}
       </div>

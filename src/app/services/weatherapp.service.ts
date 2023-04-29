@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
 import { HomeService } from './home.service';
 
 @Injectable({
@@ -10,11 +9,8 @@ export class WeatherAppService {
   cityWeatherData?: any = {};
   cityWeatherDataList?: any = [];
   allreadyExistasFavourite: boolean = false;
-  constructor(
-    private http: HttpClient,
-    public router: Router,
-    public homeServices: HomeService
-  ) {}
+
+  constructor(private http: HttpClient, public homeServices: HomeService) {}
 
   ngOnInit(): void {}
 

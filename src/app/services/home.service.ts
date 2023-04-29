@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HomeService {
-  constructor(private http: HttpClient, public router: Router) {}
+  constructor(public router: Router) {}
   ngOnInit(): void {}
   addtoFavourite(weatherData: any) {
     const data: any = localStorage.getItem('weatherDetailsList');
