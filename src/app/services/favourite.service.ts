@@ -32,7 +32,7 @@ export class FavouriteService {
       data: weatherData.data,
     };
     localStorage.setItem('weatherDetails', JSON.stringify(weatherData));
-    this.refreshFavouriteList();
+    window.location.reload();
   }
 
   removefromFavouriteList(weatherData: any): void {
@@ -52,12 +52,7 @@ export class FavouriteService {
       }
     });
     localStorage.setItem('weatherDetailsList', JSON.stringify(datalist));
-    this.refreshFavouriteList();
-  }
 
-  refreshFavouriteList() {
-    this.router.navigate(['favourite']).then(() => {
-      window.location.reload();
-    });
+    window.location.reload();
   }
 }

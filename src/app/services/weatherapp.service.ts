@@ -59,11 +59,14 @@ export class WeatherAppService {
         );
         if (city.includes(this.cityWeatherData?.data?.location?.name)) {
           console.log('allready exist');
+          console.log('before', this.cityWeatherDataList);
           this.cityWeatherDataList.map((item: any) => {
             if (item?.data?.location?.name === weatherDetails?.location?.name) {
               this.allreadyExistasFavourite = item?.favourite;
+              item.recentSearch = true;
             }
           });
+          console.log('after', this.cityWeatherDataList);
           this.cityWeatherData = {
             favourite: this.allreadyExistasFavourite,
             recentSearch: true,
@@ -73,16 +76,6 @@ export class WeatherAppService {
             'weatherDetails',
             JSON.stringify(this.cityWeatherData)
           );
-          const data: any = localStorage.getItem('weatherDetailsList');
-          let datalist = JSON.parse(data);
-
-          datalist = datalist.filter(
-            (item: { data: { location: { name: any } } }) =>
-              item?.data?.location?.name !== weatherDetails?.location?.name
-          );
-          datalist.push(this.cityWeatherData);
-          localStorage.setItem('weatherDetailsList', JSON.stringify(datalist));
-
           localStorage.setItem(
             'weatherDetailsList',
             JSON.stringify(this.cityWeatherDataList)
