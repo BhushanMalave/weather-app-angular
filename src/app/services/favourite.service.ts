@@ -32,7 +32,6 @@ export class FavouriteService {
       data: weatherData.data,
     };
     localStorage.setItem('weatherDetails', JSON.stringify(weatherData));
-    window.location.reload();
   }
 
   removefromFavouriteList(weatherData: any): void {
@@ -52,7 +51,5 @@ export class FavouriteService {
       }
     });
     localStorage.setItem('weatherDetailsList', JSON.stringify(datalist));
-
-    window.location.reload();
   }
 }

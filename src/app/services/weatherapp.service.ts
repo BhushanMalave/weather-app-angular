@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { HomeService } from './home.service';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,38 +10,15 @@ export class WeatherAppService {
   cityWeatherDataList?: any = [];
   allreadyExistasFavourite: boolean = false;
 
-  constructor(private http: HttpClient, public homeServices: HomeService) {}
+  constructor(
+    private apiServices: ApiService,
+    public homeServices: HomeService
+  ) {}
 
   ngOnInit(): void {}
 
-  getWeather(city: string) {
-    return this.http.get(
-      `https://weatherapi-com.p.rapidapi.com/current.json?q=${city}`,
-      {
-        headers: {
-          'X-RapidAPI-Key':
-            '2e61d5ed65msh6e1fd3b3e86180ap10576cjsn6e517a01ff1e',
-          'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com',
-        },
-      }
-    );
-  }
-
-  searchApi(text: string) {
-    return this.http.get(
-      `https://weatherapi-com.p.rapidapi.com/search.json?q=${text}`,
-      {
-        headers: {
-          'X-RapidAPI-Key':
-            '2e61d5ed65msh6e1fd3b3e86180ap10576cjsn6e517a01ff1e',
-          'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com',
-        },
-      }
-    );
-  }
-
   getWeatherData(city: string) {
-    this.getWeather(city).subscribe((weatherDetails: any) => {
+    this.apiServices.getWeather(city).subscribe((weatherDetails: any) => {
       this.cityWeatherData = {
         favourite: false,
         recentSearch: true,

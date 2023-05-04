@@ -33,7 +33,6 @@ export class RecentsearchService {
     });
 
     localStorage.setItem('weatherDetailsList', JSON.stringify(datalist));
-    window.location.reload();
   }
 
   removefromfavouriteinRecentSearchList(weatherData: any): void {
@@ -53,7 +52,6 @@ export class RecentsearchService {
       }
     });
     localStorage.setItem('weatherDetailsList', JSON.stringify(datalist));
-    window.location.reload();
   }
 
   clearRecentSearchList(): void {
@@ -63,6 +61,5 @@ export class RecentsearchService {
       item.recentSearch = false;
     });
     localStorage.setItem('weatherDetailsList', JSON.stringify(datalist));
-    window.location.reload();
   }
 }

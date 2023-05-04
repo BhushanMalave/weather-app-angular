@@ -16,18 +16,25 @@ export class HomeComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.getCityWeatherData();
+  }
+
+  getCityWeatherData() {
     let data: any = localStorage.getItem('weatherDetails');
     if (data === null) {
       this.weatherAppServices.getWeatherData('Udupi');
-      let data: any = localStorage.getItem('weatherDetails');
+      data = localStorage.getItem('weatherDetails');
     }
     this.cityweatherData = JSON.parse(data);
   }
+
   addToFavourite(cityweatherData: any) {
     this.homeServices.addtoFavourite(cityweatherData);
+    this.getCityWeatherData();
   }
   removeFromFavourite(cityweatherData: any) {
     this.homeServices.removefromFavourite(cityweatherData);
+    this.getCityWeatherData();
   }
   convertToFahreneit() {
     this.temperature = 'Fahreneit';

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HomeService } from 'src/app/services/home.service';
 import { RecentsearchService } from 'src/app/services/recentsearch.service';
-import { WeatherAppService } from 'src/app/services/weatherapp.service';
 
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-recentsearch',
   templateUrl: './recentsearch.component.html',
@@ -13,29 +12,35 @@ export class RecentsearchComponent implements OnInit {
   showDialogueBox: boolean = false;
 
   constructor(
-    public weatherAppServices: WeatherAppService,
-    public homeServices: HomeService,
+    public router: Router,
     public recentsearchServices: RecentsearchService
   ) {}
   ngOnInit(): void {
+    this.getRecentSearchCityWeatherData();
+  }
+
+  getRecentSearchCityWeatherData() {
     this.recentsearchServices.getRecentSearchCities();
     let data: any = localStorage.getItem('recentSearchDetails');
     this.recentSearchCities = JSON.parse(data);
   }
-
   showWeatherDetails(cityData: any) {
     localStorage.setItem('weatherDetails', JSON.stringify(cityData));
-    this.homeServices.refresh();
+    this.router.navigate(['']);
   }
   addToFavourite(cityData: any) {
     this.recentsearchServices.addtoFavouritefromRecentSearch(cityData);
+    this.getRecentSearchCityWeatherData();
   }
 
   removeFromFavourite(cityData: any) {
     this.recentsearchServices.removefromfavouriteinRecentSearchList(cityData);
+    this.getRecentSearchCityWeatherData();
   }
 
   clearRecentSearch() {
     this.recentsearchServices.clearRecentSearchList();
+    this.showDialogueBox = false;
+    this.getRecentSearchCityWeatherData();
   }
 }

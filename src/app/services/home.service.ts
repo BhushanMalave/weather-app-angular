@@ -23,7 +23,6 @@ export class HomeService {
       }
     });
     localStorage.setItem('weatherDetailsList', JSON.stringify(datalist));
-    this.refresh();
   }
 
   removefromFavourite(weatherData: any): void {
@@ -42,7 +41,6 @@ export class HomeService {
       }
     });
     localStorage.setItem('weatherDetailsList', JSON.stringify(datalist));
-    this.refresh();
   }
 
   refresh() {

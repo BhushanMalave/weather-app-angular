@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from 'src/app/services/api.service';
 import { WeatherAppService } from 'src/app/services/weatherapp.service';
 @Component({
   selector: 'app-main',
@@ -11,19 +12,23 @@ export class MainComponent implements OnInit {
   active = 'active';
   date: any;
 
-  constructor(public weatherAppServices: WeatherAppService) {}
+  constructor(
+    public weatherAppServices: WeatherAppService,
+    private apiServices: ApiService
+  ) {}
 
   ngOnInit(): void {
     this.date = new Date();
   }
 
   handleChange(event: string): void {
-    this.weatherAppServices.searchApi(event).subscribe((cityResults: any) => {
+    this.apiServices.searchApi(event).subscribe((cityResults: any) => {
       this.cityResults = cityResults;
     });
   }
   handleCityClick(city: any) {
     this.weatherAppServices.getWeatherData(city);
     this.cityResults = [];
+    this.cityName = '';
   }
 }
