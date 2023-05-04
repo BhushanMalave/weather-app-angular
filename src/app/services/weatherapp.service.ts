@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HomeService } from './home.service';
 import { ApiService } from './api.service';
-
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root',
 })
@@ -10,10 +9,7 @@ export class WeatherAppService {
   cityWeatherDataList?: any = [];
   allreadyExistasFavourite: boolean = false;
 
-  constructor(
-    private apiServices: ApiService,
-    public homeServices: HomeService
-  ) {}
+  constructor(private apiServices: ApiService, public router: Router) {}
 
   ngOnInit(): void {}
 
@@ -73,7 +69,9 @@ export class WeatherAppService {
           JSON.stringify(this.cityWeatherDataList)
         );
       }
-      this.homeServices.refresh();
+      this.router.navigate(['']).then(() => {
+        window.location.reload();
+      });
     });
   }
 }

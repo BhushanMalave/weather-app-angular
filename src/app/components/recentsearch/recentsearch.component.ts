@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { RecentsearchService } from 'src/app/services/recentsearch.service';
-
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-recentsearch',

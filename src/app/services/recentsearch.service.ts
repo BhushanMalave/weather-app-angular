@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecentsearchService {
-  constructor(public router: Router) {}
-
   getRecentSearchCities(): void {
     const data: any = localStorage.getItem('weatherDetailsList');
     const datalist = JSON.parse(data);
