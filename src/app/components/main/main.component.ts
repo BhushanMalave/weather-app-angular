@@ -19,6 +19,7 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     this.date = new Date();
+    // this.weatherAppServices.updateWeatherData();
   }
 
   handleChange(event: string): void {

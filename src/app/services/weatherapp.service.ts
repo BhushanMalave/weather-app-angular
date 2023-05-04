@@ -11,7 +11,20 @@ export class WeatherAppService {
 
   constructor(private apiServices: ApiService, public router: Router) {}
 
-  ngOnInit(): void {}
+  updateWeatherData() {
+    const data: any = localStorage.getItem('weatherDetailsList');
+    if (data! == null) {
+      this.cityWeatherDataList = JSON.parse(data);
+      this.cityWeatherDataList.map((item: any) => {
+        this.apiServices
+          .getWeather(item?.data?.location?.name)
+          .subscribe((weatherDetails: any) => {
+            item.data = weatherDetails;
+          });
+      });
+    }
+    localStorage.setItem('weatherDetailsList', JSON.stringify(data));
+  }
 
   getWeatherData(city: string) {
     this.apiServices.getWeather(city).subscribe((weatherDetails: any) => {
@@ -31,15 +44,12 @@ export class WeatherAppService {
           (value: any) => value?.data?.location?.name
         );
         if (city.includes(this.cityWeatherData?.data?.location?.name)) {
-          console.log('allready exist');
-          console.log('before', this.cityWeatherDataList);
           this.cityWeatherDataList.map((item: any) => {
             if (item?.data?.location?.name === weatherDetails?.location?.name) {
               this.allreadyExistasFavourite = item?.favourite;
               item.recentSearch = true;
             }
           });
-          console.log('after', this.cityWeatherDataList);
           this.cityWeatherData = {
             favourite: this.allreadyExistasFavourite,
             recentSearch: true,
@@ -55,7 +65,6 @@ export class WeatherAppService {
           );
         } else {
           this.cityWeatherDataList.push(this.cityWeatherData);
-          console.log('does not exist');
           localStorage.setItem(
             'weatherDetailsList',
             JSON.stringify(this.cityWeatherDataList)
@@ -63,7 +72,6 @@ export class WeatherAppService {
         }
       } else {
         this.cityWeatherDataList.push(this.cityWeatherData);
-        console.log('does not exist');
         localStorage.setItem(
           'weatherDetailsList',
           JSON.stringify(this.cityWeatherDataList)
